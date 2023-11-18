@@ -1,0 +1,61 @@
+№1
+count = 0
+max_word = {}
+
+lst = []
+with open('text', 'r', encoding='utf-8') as f:
+    data = f.read().split()
+    count += len(data)
+print('Слов в тексте: ',count)
+
+for i in data:
+    if i in max_word:
+        max_word[i] += 1
+    else:
+        max_word[i] = 1
+print('Наиболее встречаемое слово: ', max(max_word, key=max_word.get))
+№2 -
+№3
+with open('input', 'r') as f:
+    data = f.read()
+
+len_lines = 0
+lines = data.split('\n')
+for i in lines:
+    if i:
+        len_lines += 1
+
+len_words = len(data.split())
+
+count_let = 0
+for i in data:
+    if i.isalpha():
+        count_let += 1
+
+print(count_let, ' letters')
+print(len_words, " words")
+print(len_lines, ' lines')
+№4
+data = "Hello, world! Python IS the programming language of thE future. My EMAIL is.... PYTHON is awesome!!!!"
+data2 = data.lower()
+with open('input', 'r') as f:
+    text = f.read().split()
+
+for i in text:
+    data2 = data2.replace(i, '*' * len(i))
+
+print(data2)
+№5
+def read_last(lines, file):
+    if lines > 0:
+        with open(file, encoding='utf-8') as text:
+            file_lines = text.readlines()[-lines:]
+        for line in file_lines:
+            print(line.strip())
+        else:
+            print('Количество строк может быть только целым положительным')
+
+
+
+read_last(3, 'input')
+read_last(-5, 'input')
