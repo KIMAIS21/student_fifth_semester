@@ -1,0 +1,28 @@
+1-4
+class Fish:
+    def __init__(self, type_name, type_of_food):
+        self.type_name = type_name
+        self.type_of_food = type_of_food
+
+    def fish_eat_type(self):
+        print(f"It is {self.type_name}, he/she this {self.type_of_food}")
+
+
+fish = Fish('shark', 'predator')
+print(fish.type_name)
+fish.fish_eat_type()
+
+class detailed_Fish(Fish):
+    def __init__(self, type_name, type_of_food, water_reservoir):
+        super().__init__(type_name, type_of_food)
+        self.water_reservoir = water_reservoir
+
+    def detailed(self):
+        print(
+            f"Thit is a {self.type_name}, he/she this {self.type_of_food}. He/She lives in the {self.water_reservoir}")
+
+
+wild_fish = detailed_Fish("pike", "predator", "river")
+wild_fish.detailed()
+
+
