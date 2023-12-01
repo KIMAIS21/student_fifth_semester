@@ -1,0 +1,82 @@
+class Tomato:
+    # 2) статическое свойство states содержит все стадии созревания помидора
+    states = ['зелёный', 'желтый', 'красный', 'отсутствует']
+
+    def __init__(self, index):
+        # 3) динамическое свойство index, передается параметром
+        self.index = index
+        # 3) динамическое свойство _state, принимает первое значение из словаря states
+        self._state = self.states[0]
+
+    def grow(self):
+        # 4) метод grow() переводит томат на следующую стадию созревания
+        current_index = self.states.index(self._state)
+        if current_index < len(self.states) - 1:
+            self._state = self.states[current_index + 1]
+
+    def is_ripe(self):
+        # 5) метод is_ripe() проверяет, что томат созрел
+        return self._state == 'красный'
+
+
+class TomatoBush:
+    def __init__(self, num):
+        self.tomatoes = [Tomato(index) for index in range(1, num + 1)]
+
+    def grow_all(self):
+        for tomato in self.tomatoes:
+            tomato.grow()
+
+    def all_are_ripe(self):
+        return all([tomato.is_ripe() for tomato in self.tomatoes])
+
+    def give_away_all(self):
+        self.tomatoes = []
+
+
+class Gardener:
+    def __init__(self, name, plant):
+        # name - публичное свойство, _plant - приватное свойство
+        self.name = name
+        self._plant = plant
+
+    def work(self):
+        self._plant.grow_all()
+
+    def harvest(self):
+        if self._plant.all_are_ripe():
+            self._plant.give_away_all()
+            print("Собрали все помидоры!")
+        else:
+            print("Еще не все помидоры созрели.")
+
+    @staticmethod
+    def knowledge_base():
+        print("         Советы и рекомендации по садоводству \n"
+              "Не перенаселяйте горшки семенами\n"
+              "Позаботьтесь о достаточном количестве света\n"
+              "Поставьте рядом с саженцами вентилятор\n"
+              "Прогрейте почву в огороде\n"
+              "Заройте стебли саженцев поглубже\n"
+              "")
+
+# Тесты:
+if __name__ == "__main__":
+    # Тест 1: Вызовите справку по садоводству
+    Gardener.knowledge_base()
+    # Тест 2: Создайте объекты классов TomatoBush и Gardener
+    TomatoBush_3Tomata = TomatoBush(3) # Создание куста с тремя томатами
+    gardener = Gardener('Serega', TomatoBush_3Tomata) #Создание садовника Серёги
+    #Тест 3: Используя объекты класса Gardener, поухаживайте за кустом с помидорами
+    gardener.work()
+    #Тест 4: Попробуйте собрать урожай, когда томаты ещё не дозрели.
+    gardener.harvest()
+    #Тест 5: Соберите урожай
+    while not TomatoBush_3Tomata.all_are_ripe(): #Пока не созрели все помидоры
+        gardener.work()                          #Садовник работает
+        if TomatoBush_3Tomata.all_are_ripe():    #Если они созрели, то:
+            gardener.harvest()                   #Садовник их собрал
+
+
+
+
