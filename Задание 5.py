@@ -1,4 +1,4 @@
-Задание 5
+#Задание 5
 class CustomException(Exception): #Класс принимающие сообщения и выводящий сообщения об ошибке
     def __init__(self, error):
         self.error = error
